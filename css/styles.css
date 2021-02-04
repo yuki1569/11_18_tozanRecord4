@@ -1,0 +1,12 @@
+
+    #navbar {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #navbar li {
+      display: inline-block;
+      width: 100px;
+      height: 50px;
+
+    }
