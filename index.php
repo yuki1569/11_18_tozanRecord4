@@ -11,7 +11,7 @@ $pdo = connect_to_db();
   <!-- <div style="text-align:center">
     <img src="image.php?id=<?= $record['image_id']; ?>" width="500px" height="auto">
   </div> -->
-  <div style="text-align: center; margin-top:30px;">
+  <div style="text-align: center; margin-top:30px; margin-top: 100px;">
     <h1>ログイン・登録</h1>
   </div>
   <form action="execution.php/user-login.php" method="POST" style="width: 60%; margin:0 auto;">

@@ -96,7 +96,7 @@ $records = $stmt->fetchAll();
     #modal {
       background: #fff;
       color: #555;
-      width: 55%;
+      width: 48%;
       padding: 40px;
       border-radius: 4px;
       position: absolute;
@@ -177,6 +177,7 @@ $records = $stmt->fetchAll();
 
 
         <a id="text"></a>
+
         <script>
           $('.like<?php echo $records[$i]['image_id'] ?>').on('click', function() {
             const requestUrl = 'execution.php/like_create.php'; // リクエスト送信先のファイル
@@ -184,16 +185,38 @@ $records = $stmt->fetchAll();
             axios.get(`${requestUrl}?like_user_id=<?php echo $user_id ?>&image_id=<?php echo $records[$i]['image_id'] ?>&user_id=<?php echo $records[$i]['post_user_id'] ?>`) // リクエスト送信
               .then(function(response) {
 
-                console.log(response);
+                // ハートのCSS（色）をtoggleで切り替える
                 $('.like<?php echo $records[$i]['image_id'] ?>').toggleClass('red');
+
+                const requestUrl2 = 'execution.php/like_create2.php'; // リクエスト送信先のファイル
+                axios.get(`${requestUrl2}?like_user_id=<?php echo $user_id ?>&image_id=<?php echo $records[$i]['image_id'] ?>&user_id=<?php echo $records[$i]['post_user_id'] ?>`) // リクエスト送信
+                  .then(function(response) {
+
+                    console.log(response.data);
+
+                    if (response.data.length === 0) {
+                      document.getElementById('likes_total<?php echo $records[$i]['image_id'] ?>').innerHTML = `<span>0</span>`;
+                    } else if (response.data[0].cnt >= 1) {
+                      document.getElementById('likes_total<?php echo $records[$i]['image_id'] ?>').innerHTML = `<span>${response.data[0].cnt}</span>`;
+
+                    }
+
+                  })
+                  .catch(function(error) {})
+                  .finally(function() {});
 
               })
               .catch(function(error) {})
               .finally(function() {});
           });
         </script>
-      <a><?php echo $records[$i]['cnt']?></a>
-      <a><?php echo $records[$i]['image_id']?></a>
+
+        <?php if ($records[$i]['cnt'] == 0) : ?>
+          <span id="likes_total<?php echo $records[$i]['image_id'] ?>">0</span>
+        <?php else : ?>
+          <span id="likes_total<?php echo $records[$i]['image_id'] ?>"><?php echo $records[$i]['cnt'] ?></span>
+        <?php endif ?>
+        <!-- <a><?php echo $records[$i]['image_id'] ?></a> -->
       </div>
 
     <?php endfor; ?>

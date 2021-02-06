@@ -116,8 +116,8 @@ unset($pdo);
     #modal {
       background: #fff;
       color: #555;
-      width: 55%;
-      padding: 40px;
+      width: 45%;
+      padding: 45px;
       border-radius: 4px;
       position: absolute;
       top: 40px;
@@ -254,6 +254,9 @@ unset($pdo);
     <h2>こんにちは<?php echo ($status['username']); ?>さん</h2>
 
     <a id="add_btn" style="display:block;">＋</a>
+
+    <!-- <img src="images/1022282955601a48e9d06ec3.70028694.png" alt="" > -->
+
     <?php for ($i = 0; $i < count($records); $i++) : ?>
       <div class="thumbnail">
         <a class="modal-btn">
@@ -265,15 +268,15 @@ unset($pdo);
           <a href="javascript:void(0);" onclick="var ok = confirm('削除しますか？'); if (ok) location.href='execution.php/delete.php?id=<?= $records[$i]['image_id']; ?>'">
             <i class="far fa-trash-alt"></i> </a>
           <!-- 編集機能 -->
-          <a href="edit.php?id=<?= $records[$i]["image_id"]; ?>">edit</a>
+          <a href="edit.php?id=<?= $records[$i]["image_id"]; ?>" class="fas fa-edit"></a>
         </div>
       </div>
     <?php endfor; ?>
   </div>
 
-  <center>
+  <!-- <center>
     <input type="button" id="push" onclick="return push()" value="クリックするとプッシュ通知が送られます" />
-  </center>
+  </center> -->
 
   <a href="execution.php/logout.php">logout</a>
 
@@ -282,7 +285,7 @@ unset($pdo);
       return Push.create('更新情報');
     }
   </script>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>
@@ -314,7 +317,7 @@ unset($pdo);
         var mydiv = document.getElementById("modal");
         mydiv.innerHTML =
           `<h3>${records[i]['name']}</h3>
-            <img src="images/${records[i]['image_name']}" data-id="${records[i]['image_id'] }" width="100%" height="auto" class="mr-3">
+            <img src="images/${records[i]['image_name']}" data-id="${records[i]['image_id'] }" width="100%"  height="auto" class="mr-3">
             <h5>${records[i]['name']} (${records[i]['maximumAltitude']}m)</h5>
             <h5>日時 ${records[i]['date']}</h5>
             <h5>活動時間 ${records[i]['time']}</h5>
